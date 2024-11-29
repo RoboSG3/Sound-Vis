@@ -20,25 +20,54 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Dictionary<String, float> audioAngles = getAudiosInRange();
+        List<AudioData> audioList = GetAudiosInRange();
 
-        Debug.Log(audioAngles.GetValueOrDefault("Cat"));
+        foreach (AudioData item in audioList)
+        {
+            Debug.Log("Name: " + item.name);
+            Debug.Log("Relative angle: " + item.relativeAngle);
+            Debug.Log("Relative distance: " + item.relativeDistance);
+            Debug.Log("Relative height: " + item.relativeHeight);
+        }
+
+
+
     }
 
-    Dictionary<String, float> getAudiosInRange()
+    List<AudioData> GetAudiosInRange()
     {
-        Dictionary<String, float> audioAngles = new Dictionary<string, float>();
+        List<AudioData> audioSources = new();
         foreach (AudioSource source in sources)
         {
             float range = source.maxDistance;
             Vector3 axis = Vector3.up;
-            if (Vector3.Distance(source.transform.position, cam.transform.position) < range) {
+            float relativeDistance = Vector3.Distance(source.transform.position, cam.transform.position);
+            if (relativeDistance < range)
+            {
                 Vector3 perpendicularCam = Vector3.Cross(axis, cam.transform.TransformDirection(Vector3.forward));
                 Vector3 perpendicularAudio = Vector3.Cross(axis, source.transform.position);
-                audioAngles.Add(source.name, Vector3.SignedAngle(perpendicularCam, perpendicularAudio, axis));
+                float relativeAngle = Vector3.SignedAngle(perpendicularCam, perpendicularAudio, axis);
+                float relativeHeight = source.transform.position.y - cam.transform.position.y;
+                audioSources.Add(new AudioData(source.name, relativeAngle, relativeDistance, relativeHeight));
                 Debug.Log(source.name);
             }
         }
-        return audioAngles;
+        return audioSources;
     }
+
+}
+
+struct AudioData
+{
+    public AudioData(string name, float relativeAngle, float relativeDistance, float relativeHeight)
+    {
+        this.name = name;
+        this.relativeAngle = relativeAngle;
+        this.relativeDistance = relativeDistance;
+        this.relativeHeight = relativeHeight;
+    }
+    public string name;
+    public float relativeAngle;
+    public float relativeDistance;
+    public float relativeHeight;
 }
