@@ -55,6 +55,11 @@ public class AudioManager : MonoBehaviour
         return audioSources;
     }
 
+    public void UpdateSources()
+    {
+        sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+    }
+
 }
 
 public struct AudioData
