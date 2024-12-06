@@ -7,9 +7,11 @@ public class Scanner : MonoBehaviour
     [SerializeField]
     LayerMask collectableLayer;
     [SerializeField]
-    LineRenderer scanLine;
     float scanTimer = 2f;
+    [SerializeField]
+    AudioManager audioManager;
     bool startTimer = false;
+    bool focusSource = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,8 +21,7 @@ public class Scanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CastRay();
-        ScanTimer();
+        CastRay();  
     }
 
     void CastRay()
@@ -30,31 +31,31 @@ public class Scanner : MonoBehaviour
         Ray scanRay = new Ray(center, direction);
         if (Physics.Raycast(scanRay, out RaycastHit scanHit, 100, collectableLayer))
         {
-            if (startTimer == false)
+            ScanTimer();
+            if (scanTimer <= 0f)
             {
-                startTimer = true;
+                Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
+                Destroy(scanHit.collider.gameObject);
+                audioManager.UpdateSources();
             }
-            scanLine.SetPosition(0, center);
-            scanLine.SetPosition(1, scanHit.point);
-            Debug.Log("Hit object: " + scanHit.collider.gameObject.name);
-            Debug.DrawLine(center, scanHit.point, Color.green, 2);
-        }
-        Debug.Log(scanTimer);
-        if (scanTimer <= 0f)
+        } else
         {
-            Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
+            scanTimer = 2f;
+            startTimer = false;
         }
+        //Debug.Log(scanTimer);
+
     }
 
     void ScanTimer()
     {
+        if (startTimer == false)
+        {
+            startTimer = true;
+        }
         if (startTimer && scanTimer > 0f)
         {
             scanTimer -= Time.deltaTime;
-        }else if (startTimer && scanTimer <= 0f)
-        {
-            startTimer = false;
-            scanTimer = 2f;
         }
     }
 
