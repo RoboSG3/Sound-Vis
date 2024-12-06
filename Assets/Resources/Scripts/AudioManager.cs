@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    public List<AudioData> GetAudiosInRange()
+    List<AudioData> GetAudiosInRange()
     {
         List<AudioData> audioSources = new();
         foreach (AudioSource source in sources)
@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
 
 }
 
-public struct AudioData
+struct AudioData
 {
     public AudioData(string name, float relativeAngle, float relativeDistance, float relativeHeight)
     {
