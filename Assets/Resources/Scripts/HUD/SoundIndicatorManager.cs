@@ -11,7 +11,7 @@ public class SoundIndicator : MonoBehaviour
 
     public CanvasGroup soundIndicatorCanvas;
     public float maxFadeTime;
-    Dictionary<string, IndicatorData> indicatorDataset;
+    Dictionary<string, IndicatorData> indicatorDataset = new Dictionary<string, IndicatorData>();
     
     void Start()
     {
@@ -26,30 +26,33 @@ public class SoundIndicator : MonoBehaviour
         {
             if (indicatorDataset.ContainsKey(item.name))
             {
+                Debug.Log("Contains");
                 indicatorDataset[item.name] = new IndicatorData(indicatorDataset[item.name].indicatorGameObject, item, maxFadeTime);
             }
             else
             {
-                GameObject newIndicator = (Instantiate(prefab) as GameObject);
-                newIndicator.transform.parent = this.gameObject.transform;
+                //Debug.Log("New Instance");
+                GameObject newIndicator = Instantiate(prefab, new Vector3(gameObject.GetComponent<RectTransform>().rect.width/2, gameObject.GetComponent<RectTransform>().rect.height/2,0), Quaternion.identity);
+                newIndicator.transform.SetParent(gameObject.transform);
                 indicatorDataset.Add(item.name, new IndicatorData(newIndicator, item, maxFadeTime));
+                Debug.Log("Ende:" + indicatorDataset.ContainsKey(item.name) + item.name);
             }
         }
 
-        Dictionary<string, IndicatorData> tempData = indicatorDataset;
-        foreach (KeyValuePair<string, IndicatorData> item in tempData) 
+        Dictionary<string, IndicatorData> tempData = new Dictionary<string, IndicatorData>(indicatorDataset);
+        foreach (var key in tempData.Keys) 
         {
-            if (item.Value.lifeTime > 0)
+            if (indicatorDataset[key].lifeTime > 0)
             {
-                IndicatorData data = indicatorDataset[item.Key];
+                IndicatorData data = indicatorDataset[key];
                 data.lifeTime -= Time.deltaTime;
-                indicatorDataset[item.Key] = data;
-                indicatorDataset[item.Key].indicatorGameObject.transform.localEulerAngles = new Vector3(0, 0, -indicatorDataset[item.Key].audioData.relativeAngle);
+                indicatorDataset[key] = data;
+                indicatorDataset[key].indicatorGameObject.transform.localEulerAngles = new Vector3(0, 0, -indicatorDataset[key].audioData.relativeAngle);
             }
             else
             {
-                Destroy(indicatorDataset[item.Key].indicatorGameObject);
-                indicatorDataset.Remove(item.Key);
+                Destroy(indicatorDataset[key].indicatorGameObject);
+                indicatorDataset.Remove(key);
             }
         }
     }
