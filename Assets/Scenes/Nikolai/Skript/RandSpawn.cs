@@ -4,7 +4,8 @@ using UnityEngine;
 public class RandSpawn : MonoBehaviour
 {   
     [SerializeField] private GameObject spawnObject;
-    [SerializeField] private  int maxSpawnAmount;
+    [SerializeField] private  int minSpawnAmount = 0;
+    [SerializeField] private  int maxSpawnAmount = 1;
     private Transform spawner;
 
     public void Spawn()
@@ -28,7 +29,7 @@ public class RandSpawn : MonoBehaviour
     void Start()
     {
         spawner = transform;
-        for (int i = Random.Range(0,maxSpawnAmount); i >0; i--)
+        for (int i = Random.Range(minSpawnAmount,maxSpawnAmount); i >0; i--)
         { 
             Spawn();
         }
