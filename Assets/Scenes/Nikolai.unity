@@ -932,6 +932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 977417648}
+  maxSpawnAmount: 10
 --- !u!4 &1830795531
 Transform:
   m_ObjectHideFlags: 0
