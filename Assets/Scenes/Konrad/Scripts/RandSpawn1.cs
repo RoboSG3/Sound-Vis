@@ -6,6 +6,7 @@ public class RandSpawn1 : MonoBehaviour
     [SerializeField] private GameObject spawnObject;
     [SerializeField] private  int maxSpawnAmount;
     private Transform spawner;
+    private int spawnCount = 0;
 
     public void Spawn()
     {
@@ -23,12 +24,16 @@ public class RandSpawn1 : MonoBehaviour
         
         var spawenedObject = Instantiate(spawnObject, spawnPos, Quaternion.identity);
         spawenedObject.transform.SetParent(spawner);
+        Transform childTransform = spawenedObject.transform.Find("CatAudio");
+        childTransform.gameObject.name = "CatAudio " + spawnCount;
+        spawnCount++;
+
     }
 
     IEnumerator WaitToSpawn()
     {
         spawner = transform;
-        //for (int i = Random.Range(0,maxSpawnAmount); i >0; i--)
+
         for (int i = maxSpawnAmount; i > 0; i--)
         {
             Spawn();
