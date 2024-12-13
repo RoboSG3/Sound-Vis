@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -11,7 +12,9 @@ public class Scanner : MonoBehaviour
     [SerializeField]
     AudioManager audioManager;
     bool startTimer = false;
-    bool focusSource = false;
+    //bool focusSource = false;
+    [SerializeField]
+    LineRenderer scanLine;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +24,7 @@ public class Scanner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CastRay();  
+        CastRay();
     }
 
     void CastRay()
@@ -31,12 +34,15 @@ public class Scanner : MonoBehaviour
         Ray scanRay = new Ray(center, direction);
         if (Physics.Raycast(scanRay, out RaycastHit scanHit, 100, collectableLayer))
         {
+            scanLine.SetPosition(0, center);
+            scanLine.SetPosition(1, scanHit.point);
             ScanTimer();
             if (scanTimer <= 0f)
             {
+ 
                 Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
-                Destroy(scanHit.collider.gameObject);
-                audioManager.UpdateSources();
+                StartCoroutine(UpdateSourcesAfterDelete(0.01f, scanHit.collider.gameObject));
+                Destroy(scanLine);
             }
         } else
         {
@@ -58,5 +64,13 @@ public class Scanner : MonoBehaviour
             scanTimer -= Time.deltaTime;
         }
     }
-
+    IEnumerator UpdateSourcesAfterDelete(float delayTime, GameObject delete)
+    {
+        //Wait for the specified delay time before continuing.
+        Destroy(delete);
+        yield return new WaitForSeconds(delayTime);
+        audioManager.UpdateSources();
+        
+        //Do the action after the delay time has finished.
+    }
 }

@@ -5,11 +5,10 @@ using UnityEngine.UIElements;
 
 public class SoundIndicator : MonoBehaviour
 {
-    public Transform playerLocation;
     public GameObject prefab;
     public GameObject audioManager;
+    public float indicatorScale;
 
-    public CanvasGroup soundIndicatorCanvas;
     public float maxFadeTime;
     Dictionary<string, IndicatorData> indicatorDataset = new Dictionary<string, IndicatorData>();
     
@@ -26,16 +25,16 @@ public class SoundIndicator : MonoBehaviour
         {
             if (indicatorDataset.ContainsKey(item.name))
             {
-                Debug.Log("Contains");
                 indicatorDataset[item.name] = new IndicatorData(indicatorDataset[item.name].indicatorGameObject, item, maxFadeTime);
             }
             else
             {
-                //Debug.Log("New Instance");
-                GameObject newIndicator = Instantiate(prefab, new Vector3(gameObject.GetComponent<RectTransform>().rect.width/2, gameObject.GetComponent<RectTransform>().rect.height/2,0), Quaternion.identity);
+                float screenWidth = gameObject.GetComponent<RectTransform>().rect.width;
+                float screenHeight = gameObject.GetComponent<RectTransform>().rect.height;
+                GameObject newIndicator = Instantiate(prefab, new Vector3(screenWidth/2, screenHeight/2, 0), Quaternion.identity);
                 newIndicator.transform.SetParent(gameObject.transform);
+                newIndicator.transform.localScale = new Vector3(indicatorScale, indicatorScale, indicatorScale);
                 indicatorDataset.Add(item.name, new IndicatorData(newIndicator, item, maxFadeTime));
-                Debug.Log("Ende:" + indicatorDataset.ContainsKey(item.name) + item.name);
             }
         }
 
