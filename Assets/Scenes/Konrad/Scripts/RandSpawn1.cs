@@ -7,7 +7,7 @@ public class RandSpawn1 : MonoBehaviour
     [SerializeField] private  int maxSpawnAmount;
     private Transform spawner;
     private int spawnCount = 0;
-
+    [SerializeField] AudioManager audioManager;
     public void Spawn()
     {
         var spawnX = Random.Range(
@@ -37,6 +37,7 @@ public class RandSpawn1 : MonoBehaviour
         for (int i = maxSpawnAmount; i > 0; i--)
         {
             Spawn();
+            audioManager.UpdateSources();
 
             yield return new WaitForSeconds(2);
         }
