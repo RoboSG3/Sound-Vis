@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class RandSpawn : MonoBehaviour
+public class RandSpawn1 : MonoBehaviour
 {   
     [SerializeField] private GameObject spawnObject;
     [SerializeField] private  int maxSpawnAmount;
@@ -24,14 +25,20 @@ public class RandSpawn : MonoBehaviour
         spawenedObject.transform.SetParent(spawner);
     }
 
-    void Start()
+    IEnumerator WaitToSpawn()
     {
         spawner = transform;
         //for (int i = Random.Range(0,maxSpawnAmount); i >0; i--)
         for (int i = maxSpawnAmount; i > 0; i--)
-        { 
+        {
             Spawn();
+
+            yield return new WaitForSeconds(2);
         }
-       
+    }
+
+    void Start()
+    {
+        StartCoroutine(WaitToSpawn());
     }
 }
