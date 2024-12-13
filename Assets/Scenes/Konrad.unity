@@ -11919,6 +11919,7 @@ GameObject:
   - component: {fileID: 3707059741832475146}
   - component: {fileID: 3707059741832475145}
   - component: {fileID: 3707059741832475144}
+  - component: {fileID: 3707059741832475147}
   m_Layer: 7
   m_Name: "T\xFCr_links"
   m_TagString: Untagged
@@ -12649,6 +12650,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3707059741832475147
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123107182165632792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6493151, y: 0.13418747, z: 1.4116814}
+  m_Center: {x: -0.26598734, y: -0.035791438, z: -0.0037731223}
 --- !u!23 &3989578286738559320
 MeshRenderer:
   m_ObjectHideFlags: 0
