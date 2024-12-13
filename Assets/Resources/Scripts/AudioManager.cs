@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         List<AudioData> audioList = GetAudiosInRange();
-        
+
         foreach (AudioData item in audioList)
         {
             Debug.Log("Name: " + item.name);
@@ -36,15 +36,16 @@ public class AudioManager : MonoBehaviour
         List<AudioData> audioSources = new();
         foreach (AudioSource source in sources)
         {
-            if (source != null) { 
+            if (source != null)
+            {
                 float range = source.maxDistance;
-                Vector3 axis = new Vector3(cam.transform.position.x, 1, cam.transform.position.z);
-                float relativeDistance = Vector3.Distance(source.transform.position, cam.transform.position);
+                Vector3 relativePosition = source.transform.position - cam.transform.position;
+                float relativeDistance = relativePosition.magnitude;
                 if (relativeDistance < range)
                 {
-                    Vector3 perpendicularCam = Vector3.Cross(axis, cam.transform.TransformDirection(Vector3.forward));
-                    Vector3 perpendicularAudio = Vector3.Cross(axis, source.transform.position);
-                    float relativeAngle = Vector3.SignedAngle(perpendicularCam, perpendicularAudio, axis);
+                    Vector3 perpendicularCam = Vector3.Cross(Vector3.up, new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z));
+                    Vector3 perpendicularAudio = Vector3.Cross(Vector3.up, new Vector3(relativePosition.x, 0, relativePosition.z));
+                    float relativeAngle = Vector3.SignedAngle(perpendicularCam, perpendicularAudio, Vector3.up);
                     float relativeHeight = source.transform.position.y - cam.transform.position.y;
                     audioSources.Add(new AudioData(source.name, relativeAngle, relativeDistance, relativeHeight));
                     Debug.Log(source.name);
