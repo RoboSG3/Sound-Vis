@@ -9668,6 +9668,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scanner
       objectReference: {fileID: 0}
+    - target: {fileID: 7965051265465805324, guid: 3cec478bd7b9466419ad2da51df53c5a, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1254231565}
+    - target: {fileID: 7965051265465805324, guid: 3cec478bd7b9466419ad2da51df53c5a, type: 3}
+      propertyPath: collectableLayer.m_Bits
+      value: 320
+      objectReference: {fileID: 0}
     - target: {fileID: 8677625033021764571, guid: 3cec478bd7b9466419ad2da51df53c5a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.39
@@ -9707,6 +9715,10 @@ PrefabInstance:
     - target: {fileID: 8677625033021764571, guid: 3cec478bd7b9466419ad2da51df53c5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750330964615920019, guid: 3cec478bd7b9466419ad2da51df53c5a, type: 3}
+      propertyPath: m_FarAttachMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13476,7 +13488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 1774215903061007096, guid: 5bea747959477044794c8490262eedcf, type: 3}
-  maxSpawnAmount: 10
+  maxSpawnAmount: 2
   audioManager: {fileID: 1254231565}
 --- !u!1 &8699575931134864389
 GameObject:
