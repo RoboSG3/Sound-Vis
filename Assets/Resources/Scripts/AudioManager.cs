@@ -10,11 +10,15 @@ public class AudioManager : MonoBehaviour
     AudioSource[] sources;
     [SerializeField]
     private Camera cam;
+    TrackToScanner tracking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        tracking = this.GetComponent<TrackToScanner>();
         sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        tracking.UpdateSources();
+
     }
 
     // Update is called once per frame
@@ -22,13 +26,13 @@ public class AudioManager : MonoBehaviour
     {
         List<AudioData> audioList = GetAudiosInRange();
 
-        foreach (AudioData item in audioList)
-        {
-            Debug.Log("Name: " + item.name);
-            Debug.Log("Relative angle: " + item.relativeAngle);
-            Debug.Log("Relative distance: " + item.relativeDistance);
-            Debug.Log("Relative height: " + item.relativeHeight);
-        }
+        //foreach (AudioData item in audioList)
+        //{
+        //    Debug.Log("Name: " + item.name);
+        //    Debug.Log("Relative angle: " + item.relativeAngle);
+        //    Debug.Log("Relative distance: " + item.relativeDistance);
+        //    Debug.Log("Relative height: " + item.relativeHeight);
+        //}
     }
 
     public List<AudioData> GetAudiosInRange()
@@ -48,7 +52,7 @@ public class AudioManager : MonoBehaviour
                     float relativeAngle = Vector3.SignedAngle(perpendicularCam, perpendicularAudio, Vector3.up);
                     float relativeHeight = source.transform.position.y - cam.transform.position.y;
                     audioSources.Add(new AudioData(source.name, relativeAngle, relativeDistance, relativeHeight));
-                    Debug.Log(source.name);
+                    //Debug.Log(source.name);
                 }
             }
         }
@@ -59,8 +63,14 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("sources deleted");
         sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
+        tracking.UpdateSources();
         //Debug.Log(sources[0]);
         //Debug.Log(sources.Length);
+    }
+
+    public AudioSource[] GetCurrentSources()
+    {
+        return sources;
     }
 
 }
