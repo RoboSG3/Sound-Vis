@@ -20,7 +20,6 @@ public class TrackToScanner : MonoBehaviour
     void Start()
     {
         audioManager= GetComponent<AudioManager>();
-        scannables = audioManager.GetCurrentSources();
         crosshairPos = targetCrosshair.GetComponent<RectTransform>().localPosition;
     }
     // Update is called once per frame
@@ -104,8 +103,8 @@ public class TrackToScanner : MonoBehaviour
             crosshairComponent.color = currentColor;
         }
     }
-    public void UpdateSources()
+    public void UpdateSources(AudioSource[] sources)
     {
-        scannables = audioManager.GetCurrentSources();
+        scannables = sources;
     }
 }
