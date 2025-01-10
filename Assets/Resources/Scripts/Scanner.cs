@@ -8,59 +8,84 @@ public class Scanner : MonoBehaviour
     [SerializeField]
     LayerMask collectableLayer;
     [SerializeField]
-    float scanTimer = 2f;
-    [SerializeField]
-    AudioManager audioManager;
+    float initialTimerValue = 2f;
+    float scanTimer;
     bool startTimer = false;
-    //bool focusSource = false;
-    [SerializeField]
-    LineRenderer scanLine;
+    AudioManager audioManager;
+    TrackToScanner tracker;
+    Collider focusedTarget;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        GameObject manager = GameObject.Find("AudioManager");
+        tracker = manager.GetComponent<TrackToScanner>();
+        audioManager= manager.GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CastRay();
+        ScanObject();
     }
 
-    void CastRay()
+    void ScanObject()
     {
-        Vector3 center = this.gameObject.transform.position;
-        Vector3 direction = this.gameObject.transform.forward;
-        Ray scanRay = new Ray(center, direction);
-        if (Physics.Raycast(scanRay, out RaycastHit scanHit, 100, collectableLayer))
+        Collider currentTarget = tracker.GetCurrentTarget();
+        // reset timer if current target is null or target has switched
+        if (currentTarget != null && focusedTarget == currentTarget)
         {
-            scanLine.SetPosition(0, center);
-            scanLine.SetPosition(1, scanHit.point);
             ScanTimer();
             if (scanTimer <= 0f)
             {
- 
-                Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
-                StartCoroutine(UpdateSourcesAfterDelete(0.01f, scanHit.collider.gameObject));
-                Destroy(scanLine);
-            }
-        } else
+                Debug.Log("Scanned!" + currentTarget.gameObject.name);
+                StartCoroutine(UpdateSourcesAfterDelete(0.01f, currentTarget.gameObject));
+            } 
+        }
+        else
         {
-            scanTimer = 2f;
+            scanTimer = initialTimerValue;
             startTimer = false;
         }
-        //Debug.Log(scanTimer);
-
+        focusedTarget = currentTarget;
     }
+    //void CastRay()
+    //{
+    //    Vector3 center = this.gameObject.transform.position;
+    //    Vector3 direction = this.gameObject.transform.forward;
+    //    Ray scanRay = new Ray(center, direction);
+
+    //    if (Physics.Raycast(scanRay, out RaycastHit scanHit, 100, collectableLayer))
+    //    {
+    //        scanLine.SetPosition(0, center);
+    //        scanLine.SetPosition(1, scanHit.point);
+    //        Debug.DrawLine(center, scanHit.point);
+    //        ScanTimer();
+    //        if (scanTimer <= 0f)
+    //        {
+ 
+    //            Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
+    //            scanLine.SetPosition(1, center);
+    //            StartCoroutine(UpdateSourcesAfterDelete(0.01f, scanHit.collider.gameObject));
+    //        }
+    //    } else
+    //    {
+    //        scanTimer = 2f;
+    //        startTimer = false;
+    //    }
+    //    //Debug.Log(scanTimer);
+
+    //}
 
     void ScanTimer()
     {
         if (startTimer == false)
         {
+            scanTimer = initialTimerValue;
             startTimer = true;
         }
         if (startTimer && scanTimer > 0f)
         {
+            tracker.UpdateTargetCroshairColor(scanTimer, initialTimerValue);
             scanTimer -= Time.deltaTime;
         }
     }
