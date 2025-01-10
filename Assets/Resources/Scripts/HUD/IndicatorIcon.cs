@@ -45,8 +45,9 @@ public class IndicatorIcon : MonoBehaviour
                 volumeFactor = source.minDistance / distance;
         }
         float perceivedVolume = source.volume * volumeFactor;
-        float scaleFactor = perceivedVolume * 7;
-        scaleFactor = Mathf.Clamp(scaleFactor, 0.5f, 1.2f);
+        Debug.Log(perceivedVolume);
+        float scaleFactor = perceivedVolume * 15;
+        scaleFactor = Mathf.Clamp(scaleFactor, 0.7f, 1.7f);
 
         icon.transform.localScale = new Vector3(defaultScale * scaleFactor, defaultScale * scaleFactor, defaultScale);
     }
