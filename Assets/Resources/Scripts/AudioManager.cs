@@ -17,8 +17,7 @@ public class AudioManager : MonoBehaviour
     {
         tracking = this.GetComponent<TrackToScanner>();
         sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        tracking.UpdateSources();
-
+        tracking.UpdateSources(sources);
     }
 
     // Update is called once per frame
@@ -40,7 +39,7 @@ public class AudioManager : MonoBehaviour
         List<AudioData> audioSources = new();
         foreach (AudioSource source in sources)
         {
-            if (source != null)
+            if (source != null && source.isPlaying)
             {
                 float range = source.maxDistance;
                 Vector3 relativePosition = source.transform.position - cam.transform.position;
@@ -63,16 +62,10 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("sources deleted");
         sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);
-        tracking.UpdateSources();
+        tracking.UpdateSources(sources);
         //Debug.Log(sources[0]);
         //Debug.Log(sources.Length);
     }
-
-    public AudioSource[] GetCurrentSources()
-    {
-        return sources;
-    }
-
 }
 
 public struct AudioData
