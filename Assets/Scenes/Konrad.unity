@@ -1607,6 +1607,14 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1254231564}
+    - target: {fileID: 6037179222546508235, guid: 7dd18baed14e62240818f9a7adbda8b5, type: 3}
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 1254231564}
+    - target: {fileID: 6037179222546508235, guid: 7dd18baed14e62240818f9a7adbda8b5, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 2080674330}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18021,6 +18029,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2080674330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7277802327414017194, guid: 77e7c27b2c5525e4aa8cc9f99d654486, type: 3}
+  m_PrefabInstance: {fileID: 644300375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2096014157
 GameObject:
   m_ObjectHideFlags: 0
