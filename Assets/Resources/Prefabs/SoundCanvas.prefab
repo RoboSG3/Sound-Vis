@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4474809833478176939}
   - component: {fileID: 1519118239285411608}
   - component: {fileID: 232157342038892555}
-  - component: {fileID: 5941306621194203917}
+  - component: {fileID: 6037179222546508235}
   m_Layer: 5
   m_Name: SoundCanvas
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5941306621194203917
+--- !u!114 &6037179222546508235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

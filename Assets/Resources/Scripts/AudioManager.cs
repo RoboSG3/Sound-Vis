@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
                     Vector3 perpendicularAudio = Vector3.Cross(Vector3.up, new Vector3(relativePosition.x, 0, relativePosition.z));
                     float relativeAngle = Vector3.SignedAngle(perpendicularCam, perpendicularAudio, Vector3.up);
                     float relativeHeight = source.transform.position.y - cam.transform.position.y;
-                    audioSources.Add(new AudioData(source.name, relativeAngle, relativeDistance, relativeHeight));
+                    audioSources.Add(new AudioData(source.name, relativeAngle, relativeDistance, relativeHeight, source));
                     //Debug.Log(source.name);
                 }
             }
@@ -77,15 +77,17 @@ public class AudioManager : MonoBehaviour
 
 public struct AudioData
 {
-    public AudioData(string name, float relativeAngle, float relativeDistance, float relativeHeight)
+    public AudioData(string name, float relativeAngle, float relativeDistance, float relativeHeight, AudioSource source)
     {
         this.name = name;
         this.relativeAngle = relativeAngle;
         this.relativeDistance = relativeDistance;
         this.relativeHeight = relativeHeight;
+        this.source = source;
     }
     public string name;
     public float relativeAngle;
     public float relativeDistance;
     public float relativeHeight;
+    public AudioSource source;
 }
