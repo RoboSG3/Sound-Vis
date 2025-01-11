@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d33678c72bda15f4b9a8f99f0e29294a, type: 3}
       propertyPath: m_Name
-      value: Korok
+      value: Korok_interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

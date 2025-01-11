@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2049661096224083143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1455285376418381730}
+  - component: {fileID: 8539060559524988341}
+  m_Layer: 0
+  m_Name: FlaschenHalsCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1455285376418381730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049661096224083143}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 1.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9130024885309395222}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8539060559524988341
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049661096224083143}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.18
+  m_Height: 1.71
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8736671290169669373
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,15 +65,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5589595
+      value: 3.024566
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000000059604645
+      value: 0.218
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.1288342
+      value: 3.7479625
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +109,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1455285376418381730}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       insertIndex: -1
@@ -62,6 +120,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7885381514824216069}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4847633204774582414}
   m_SourcePrefab: {fileID: 100100000, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
 --- !u!1 &8502670674939579308 stripped
 GameObject:
@@ -217,3 +278,31 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!136 &4847633204774582414
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8502670674939579308}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.8
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.12}
+--- !u!4 &9130024885309395222 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85e79c0e975c22b4497bb584daf12c9c, type: 3}
+  m_PrefabInstance: {fileID: 8736671290169669373}
+  m_PrefabAsset: {fileID: 0}
