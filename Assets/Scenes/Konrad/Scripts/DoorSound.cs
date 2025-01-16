@@ -24,7 +24,7 @@ public class PlaySoundOnAngle : MonoBehaviour
             (currentAngle <= negativeTargetAngle + angleTolerance &&
              currentAngle > negativeTargetAngle - angleTolerance2)))
         {
-            Debug.Log("KATZE");
+            //Debug.Log("KATZE");
             // Play the sound
             audioSource.Play();
 
