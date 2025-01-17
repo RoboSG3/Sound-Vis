@@ -32,7 +32,7 @@ public class Scanner : MonoBehaviour
     {
         Collider currentTarget = tracker.GetCurrentTarget();
         // reset timer if current target is null or target has switched
-        if (currentTarget != null && focusedTarget == currentTarget)
+        if (currentTarget != null && focusedTarget == currentTarget && currentTarget.gameObject.layer == collectableLayer)
         {
             ScanTimer();
             if (scanTimer <= 0f)
