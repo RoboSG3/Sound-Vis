@@ -66,8 +66,9 @@ public class TrackToScanner : MonoBehaviour
                 {
                     currentTarget = collider;
                     targetCrosshair.GetComponent<RectTransform>().anchoredPosition3D = screenPos;
+                    Debug.Log(targetCrosshair.GetComponent<RectTransform>().localScale);
                     Debug.Log(1 / screenPos.z);
-                    targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one * (1 / screenPos.z);
+                    targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one *  Mathf.Max((1 / screenPos.z), 1);
                     return;
                 }
             }
