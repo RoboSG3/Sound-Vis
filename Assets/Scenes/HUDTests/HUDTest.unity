@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 722140098}
   m_Layer: 6
   m_Name: CatAudio2
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 1808898213}
   m_Layer: 6
   m_Name: Cat (1)
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

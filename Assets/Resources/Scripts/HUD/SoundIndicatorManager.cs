@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class SoundIndicator : MonoBehaviour
@@ -11,11 +12,7 @@ public class SoundIndicator : MonoBehaviour
 
     public float maxFadeTime;
     Dictionary<string, IndicatorData> indicatorDataset = new Dictionary<string, IndicatorData>();
-    
-    void Start()
-    {
-    }
-
+    List<AudioData> audioList;
 
     void Update()
     {
@@ -25,7 +22,7 @@ public class SoundIndicator : MonoBehaviour
 
     private void updateIndicatorData()
     {
-        List<AudioData> audioList = audioManager.GetComponent<AudioManager>().GetAudiosInRange();
+        audioList = audioManager.GetComponent<AudioManager>().GetAudiosInRange();
         foreach (AudioData item in audioList)
         {
             if (indicatorDataset.ContainsKey(item.name))
@@ -49,16 +46,16 @@ public class SoundIndicator : MonoBehaviour
         Dictionary<string, IndicatorData> tempData = new Dictionary<string, IndicatorData>(indicatorDataset);
         foreach (var key in tempData.Keys)
         {
-            if (indicatorDataset[key].lifeTime > 0)
+            IndicatorData data = indicatorDataset[key];
+            data.lifeTime -= Time.deltaTime;
+            indicatorDataset[key] = data;
+            if (audioList.Contains(indicatorDataset[key].audioData))
             {
-                IndicatorData data = indicatorDataset[key];
-                data.lifeTime -= Time.deltaTime;
-                indicatorDataset[key] = data;
                 indicatorDataset[key].indicatorGameObject.transform.localEulerAngles = new Vector3(0, 0, -indicatorDataset[key].audioData.relativeAngle);
                 indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().UpdateArrowDirection(indicatorDataset[key].audioData.relativeHeight, indicatorDataset[key].audioData.relativeAngle);
                 indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().ChangeIconSize(indicatorDataset[key].audioData.source, indicatorDataset[key].audioData.relativeDistance);
             }
-            else
+            else if(data.lifeTime <= 0)
             {
                 Destroy(indicatorDataset[key].indicatorGameObject);
                 indicatorDataset.Remove(key);
