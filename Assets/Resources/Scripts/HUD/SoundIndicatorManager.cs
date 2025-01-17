@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 
 public class SoundIndicator : MonoBehaviour
@@ -33,7 +32,7 @@ public class SoundIndicator : MonoBehaviour
             {
                 float screenWidth = gameObject.GetComponent<RectTransform>().rect.width;
                 float screenHeight = gameObject.GetComponent<RectTransform>().rect.height;
-                GameObject newIndicator = Instantiate(prefab, new Vector3(screenWidth / 2, screenHeight / 2, 0), Quaternion.identity);
+                GameObject newIndicator = Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 newIndicator.transform.SetParent(gameObject.transform);
                 newIndicator.transform.localScale = new Vector3(indicatorScale, indicatorScale, indicatorScale);
                 indicatorDataset.Add(item.name, new IndicatorData(newIndicator, item, maxFadeTime));
