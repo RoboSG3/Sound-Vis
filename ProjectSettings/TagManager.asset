@@ -5,19 +5,19 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
-  - Button
+  - Ghost
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Collectables
-  - Wand/Schrank
-  - "T\xFCr"
-  - 
-  - 
+  - Items
+  - Ghost
+  - Wall
+  - Spawner
   - 
   - 
   - 

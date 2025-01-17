@@ -1,55 +1,61 @@
 using System;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class SoundIndicator : MonoBehaviour
 {
-    public Transform playerLocation;
     public GameObject prefab;
     public GameObject audioManager;
+    public float indicatorScale;
+    public GameObject playerCamera;
 
-    public CanvasGroup soundIndicatorCanvas;
     public float maxFadeTime;
     Dictionary<string, IndicatorData> indicatorDataset = new Dictionary<string, IndicatorData>();
-    
-    void Start()
-    {
-    }
-
+    List<AudioData> audioList;
 
     void Update()
     {
-        List<AudioData> audioList = audioManager.GetComponent<AudioManager>().GetAudiosInRange();
+        updateIndicatorData();
+        updateIndicators();
+    }
 
+    private void updateIndicatorData()
+    {
+        audioList = audioManager.GetComponent<AudioManager>().GetAudiosInRange();
         foreach (AudioData item in audioList)
         {
             if (indicatorDataset.ContainsKey(item.name))
             {
-                Debug.Log("Contains");
                 indicatorDataset[item.name] = new IndicatorData(indicatorDataset[item.name].indicatorGameObject, item, maxFadeTime);
             }
             else
             {
-                //Debug.Log("New Instance");
-                GameObject newIndicator = Instantiate(prefab, new Vector3(gameObject.GetComponent<RectTransform>().rect.width/2, gameObject.GetComponent<RectTransform>().rect.height/2,0), Quaternion.identity);
+                float screenWidth = gameObject.GetComponent<RectTransform>().rect.width;
+                float screenHeight = gameObject.GetComponent<RectTransform>().rect.height;
+                GameObject newIndicator = Instantiate(prefab, new Vector3(screenWidth / 2, screenHeight / 2, 0), Quaternion.identity);
                 newIndicator.transform.SetParent(gameObject.transform);
+                newIndicator.transform.localScale = new Vector3(indicatorScale, indicatorScale, indicatorScale);
                 indicatorDataset.Add(item.name, new IndicatorData(newIndicator, item, maxFadeTime));
-                Debug.Log("Ende:" + indicatorDataset.ContainsKey(item.name) + item.name);
             }
         }
+    }
 
+    private void updateIndicators()
+    {
         Dictionary<string, IndicatorData> tempData = new Dictionary<string, IndicatorData>(indicatorDataset);
-        foreach (var key in tempData.Keys) 
+        foreach (var key in tempData.Keys)
         {
-            if (indicatorDataset[key].lifeTime > 0)
+            IndicatorData data = indicatorDataset[key];
+            data.lifeTime -= Time.deltaTime;
+            indicatorDataset[key] = data;
+            if (audioList.Contains(indicatorDataset[key].audioData))
             {
-                IndicatorData data = indicatorDataset[key];
-                data.lifeTime -= Time.deltaTime;
-                indicatorDataset[key] = data;
                 indicatorDataset[key].indicatorGameObject.transform.localEulerAngles = new Vector3(0, 0, -indicatorDataset[key].audioData.relativeAngle);
+                indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().UpdateArrowDirection(indicatorDataset[key].audioData.relativeHeight, indicatorDataset[key].audioData.relativeAngle);
+                indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().ChangeIconSize(indicatorDataset[key].audioData.source, indicatorDataset[key].audioData.relativeDistance);
             }
-            else
+            else if(data.lifeTime <= 0)
             {
                 Destroy(indicatorDataset[key].indicatorGameObject);
                 indicatorDataset.Remove(key);
@@ -57,6 +63,8 @@ public class SoundIndicator : MonoBehaviour
         }
     }
 }
+
+
 
 public struct IndicatorData
 {
