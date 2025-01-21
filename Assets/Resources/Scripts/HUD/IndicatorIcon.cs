@@ -81,6 +81,9 @@ public class IndicatorIcon : MonoBehaviour
             case "Door":
                 image = door;
                 break;
+            case "Alarm":
+                image = alarm;
+                break;
 
             default:
                 image = ghost;
