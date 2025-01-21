@@ -19,7 +19,6 @@ public class TopfWasser : MonoBehaviour
         
         if (!_meshActive)
         {
-            _mesh = GetComponent<MeshRenderer>();
             if (_mesh != null)
             {
                 _mesh.enabled = true; // Enable the MeshRenderer to make the mesh visible
