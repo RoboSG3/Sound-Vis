@@ -11,16 +11,16 @@ public class IndicatorIcon : MonoBehaviour
     [SerializeField] float maxScale;
     [SerializeField] float maxScaleDistance;
     private float defaultScale = 1;
-    private Sprite image;
+    [SerializeField] Sprite image;
 
     [SerializeField] Sprite ghost;
-    [SerializeField] Image alarm;
-    [SerializeField] Image eggAlarm;
-    [SerializeField] Image phone;
-    [SerializeField] Image closet;
+    [SerializeField] Sprite alarm;
+    [SerializeField] Sprite eggAlarm;
+    [SerializeField] Sprite phone;
+    [SerializeField] Sprite closet;
     [SerializeField] Sprite door;
-    [SerializeField] Image drawer;
-    [SerializeField] Image smartphone;
+    [SerializeField] Sprite drawer;
+    [SerializeField] Sprite smartphone;
 
 
 
@@ -86,6 +86,6 @@ public class IndicatorIcon : MonoBehaviour
                 image = ghost;
                 break;
         }
-        source.GetComponent<Image>().sprite = image;
+        icon.GetComponent<Image>().overrideSprite = image;
     }
 }

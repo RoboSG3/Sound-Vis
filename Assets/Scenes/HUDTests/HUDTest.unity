@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 722140098}
   m_Layer: 6
   m_Name: CatAudio2
-  m_TagString: Ghost
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
