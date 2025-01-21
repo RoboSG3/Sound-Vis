@@ -6,7 +6,7 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     [SerializeField]
-    LayerMask collectableLayer;
+    int collectableLayer;
     [SerializeField]
     float initialTimerValue = 2f;
     float scanTimer;

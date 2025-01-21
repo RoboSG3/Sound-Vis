@@ -1,5 +1,6 @@
 using Unity.XR.CoreUtils;
 using UnityEngine.Assertions;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
 
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
@@ -11,6 +12,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// </summary>
     public class DynamicMoveProvider : ContinuousMoveProvider
     {
+        public bool moveBack = false;
+        public bool moveForward = false;
         /// <summary>
         /// Defines which transform the XR Origin's movement direction is relative to.
         /// </summary>
@@ -114,10 +117,37 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <inheritdoc />
         protected override Vector3 ComputeDesiredMove(Vector2 input)
         {
+            //Debug.Log(input);
+            //if (!moveBack && !moveForward) {
+            //    input = Vector2.zero;
+            //}
+            leftHandMoveInput.manualValue = Vector2.zero;
+            rightHandMoveInput.manualValue = Vector2.zero;
+            if (moveBack)
+            {
+                Debug.Log("left Pose");
+                leftHandMoveInput.manualValue = Vector2.down;
+                input = Vector2.down;
+                rightHandMoveInput.manualValue = Vector2.down;
+                Debug.Log(leftHandMoveInput.manualValue);
+                Debug.Log(rightHandMoveInput.manualValue);
+            }
+            else if (moveForward)
+            {
+                Debug.Log("right Pose");
+                leftHandMoveInput.manualValue = Vector2.up;
+                input = Vector2.up;
+                rightHandMoveInput.manualValue = Vector2.up;
+                Debug.Log(leftHandMoveInput.manualValue);
+                Debug.Log(rightHandMoveInput.manualValue);
+            } else if (leftHandMoveInput.ReadValue() == Vector2.zero && rightHandMoveInput.ReadValue() == Vector2.zero)
+            {
+                return Vector3.zero;
+            }
             // Don't need to do anything if the total input is zero.
             // This is the same check as the base method.
-            if (input == Vector2.zero)
-                return Vector3.zero;
+            //if (input == Vector2.zero)
+            //return Vector3.zero;
 
             // Initialize the Head Transform if necessary, getting the Camera from XR Origin
             if (m_HeadTransform == null)
@@ -171,10 +201,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                     break;
             }
 
-            // Combine the two poses into the forward source based on the magnitude of input
             var leftHandValue = leftHandMoveInput.ReadValue();
             var rightHandValue = rightHandMoveInput.ReadValue();
-
             var totalSqrMagnitude = leftHandValue.sqrMagnitude + rightHandValue.sqrMagnitude;
             var leftHandBlend = 0.5f;
             if (totalSqrMagnitude > Mathf.Epsilon)
@@ -185,6 +213,31 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             m_CombinedTransform.SetPositionAndRotation(combinedPosition, combinedRotation);
 
             return base.ComputeDesiredMove(input);
+        }
+
+        // custom implementation
+        public void repulsionPoseBackMade()
+        {
+            moveBack = true;
+            Debug.Log("moveBack");
+        }
+
+        public void repulsionPoseBackReleased()
+        {
+            moveBack = false;
+            Debug.Log("stopmoveBack");
+        }
+
+        public void repulsionPoseForwardMade()
+        {
+            moveForward = true;
+            Debug.Log("moveForward");
+        }
+
+        public void repulsionPoseForwardReleased()
+        {
+            moveForward = false;
+            Debug.Log("stopMoveForward");
         }
     }
 }
