@@ -30,8 +30,6 @@ public class SoundIndicator : MonoBehaviour
             }
             else
             {
-                float screenWidth = gameObject.GetComponent<RectTransform>().rect.width;
-                float screenHeight = gameObject.GetComponent<RectTransform>().rect.height;
                 GameObject newIndicator = Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 newIndicator.transform.SetParent(gameObject.transform);
                 newIndicator.transform.localScale = new Vector3(indicatorScale, indicatorScale, indicatorScale);
@@ -53,6 +51,8 @@ public class SoundIndicator : MonoBehaviour
                 indicatorDataset[key].indicatorGameObject.transform.localEulerAngles = new Vector3(0, 0, -indicatorDataset[key].audioData.relativeAngle);
                 indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().UpdateArrowDirection(indicatorDataset[key].audioData.relativeHeight, indicatorDataset[key].audioData.relativeAngle);
                 indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().ChangeIconSize(indicatorDataset[key].audioData.source, indicatorDataset[key].audioData.relativeDistance);
+                indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().RotateImage(indicatorDataset[key].audioData.relativeAngle);
+                indicatorDataset[key].indicatorGameObject.GetComponent<IndicatorIcon>().SetImage(indicatorDataset[key].audioData.source);
             }
             else if(data.lifeTime <= 0)
             {
