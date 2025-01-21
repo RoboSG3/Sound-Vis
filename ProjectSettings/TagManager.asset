@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Anchor
   - Ghost
+  - Button
+  - Wasser
   layers:
   - Default
   - TransparentFX
