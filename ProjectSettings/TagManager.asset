@@ -8,6 +8,13 @@ TagManager:
   - Ghost
   - Button
   - Wasser
+  - Door
+  - Alarm
+  - Closet
+  - Drawer
+  - Smartphone
+  - Phone
+  - Timer
   layers:
   - Default
   - TransparentFX
