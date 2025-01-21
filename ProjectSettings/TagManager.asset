@@ -5,9 +5,15 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
-  - Ghost
   - Button
+  - Ghost
   - Door
+  - Alarm
+  - Closet
+  - Drawer
+  - Smartphone
+  - Phone
+  - Timer
   layers:
   - Default
   - TransparentFX
