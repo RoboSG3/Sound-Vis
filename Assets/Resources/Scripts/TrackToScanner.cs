@@ -13,6 +13,8 @@ public class TrackToScanner : MonoBehaviour
     [SerializeField]
     LayerMask ghostLayer;
     [SerializeField]
+    LayerMask allObstacles;
+    [SerializeField]
     Canvas targetCrosshair;
     bool manualTarget = false;
     Collider currentTarget;
@@ -42,18 +44,22 @@ public class TrackToScanner : MonoBehaviour
         if (!manualTarget)
         {
             scansInsideFrustum.Sort((a, b) => scannerCam.WorldToScreenPoint(a.transform.position).z.CompareTo(scannerCam.WorldToScreenPoint(b.transform.position).z));
-
+            
             foreach (Collider collider in scansInsideFrustum)
             {
-                targetCrosshair.enabled = true;
-                Vector3 screenPos = scannerCam.WorldToScreenPoint(collider.transform.position);
-                if (screenPos.x > 64 && screenPos.x < 192 && screenPos.y > 64 && screenPos.y < 192)
-                {
-                    currentTarget = collider;
-                    targetCrosshair.GetComponent<RectTransform>().anchoredPosition3D = screenPos;
-                    targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one *  Mathf.Max((1 / screenPos.z), 1);
-                    return;
-                }
+                    if (Physics.Raycast(scannerCam.transform.position, collider.transform.position, Vector3.Distance(collider.transform.position, scannerCam.transform.position), allObstacles.value))
+                    {
+                        return;
+                    }
+                    targetCrosshair.enabled = true;
+                    Vector3 screenPos = scannerCam.WorldToScreenPoint(collider.transform.position);
+                    if (screenPos.x > 64 && screenPos.x < 192 && screenPos.y > 64 && screenPos.y < 192)
+                    {
+                        currentTarget = collider;
+                        targetCrosshair.GetComponent<RectTransform>().anchoredPosition3D = screenPos;
+                        targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one * Mathf.Max((1 / screenPos.z), 1);
+                        return;
+                    }
             }
             targetCrosshair.enabled = false;
             currentTarget = null;
