@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CutsceneHandler :MonoBehaviour
 {
+    public Camera cam;
     private CutsceneElementBase[] cutsceneElements;
     private int index = -1;
 
@@ -13,17 +14,17 @@ public class CutsceneHandler :MonoBehaviour
         cutsceneElements= GetComponents<CutsceneElementBase>();
     }
 
-    private void ExceuteCurrentElement()
+    private void ExecuteCurrentElement()
     {
         if (index >= 0 && index < cutsceneElements.Length)
         {
-            cutsceneElements[index].Excecute();
+            cutsceneElements[index].Execute();
         }
     }
 
     public void PlayNextElement()
     {
         index++;
-        ExceuteCurrentElement();
+        ExecuteCurrentElement();
     }
 }
