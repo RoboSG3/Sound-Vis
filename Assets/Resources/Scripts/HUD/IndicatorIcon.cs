@@ -58,7 +58,7 @@ public class IndicatorIcon : MonoBehaviour
                 volumeFactor = source.minDistance / distance;
         }
         float perceivedVolume = source.volume * volumeFactor;
-        Debug.Log(perceivedVolume);
+        //Debug.Log(perceivedVolume);
         float scaleFactor = perceivedVolume * 15;
         scaleFactor = Mathf.Clamp(scaleFactor, 0.7f, 1.7f);
 

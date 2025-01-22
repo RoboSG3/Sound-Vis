@@ -29,7 +29,7 @@ public class TrackToScanner : MonoBehaviour
         List<Collider> scansInsideFrustum = new();
         foreach (AudioSource source in scannables)
         {
-            Debug.Log(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)) + " " + ghostLayer.value);
+            //Debug.Log(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)) + " " + ghostLayer.value);
             if (source.gameObject != null && Equals(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)), ghostLayer.value))
             {
                 Collider collider = source.gameObject.GetComponentInParent<Collider>();

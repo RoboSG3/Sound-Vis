@@ -17,6 +17,7 @@ TagManager:
   - Timer
   - Topf
   - Wecker
+  - "Zahnb\xFCrste"
   layers:
   - Default
   - TransparentFX
