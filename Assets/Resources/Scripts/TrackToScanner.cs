@@ -9,19 +9,14 @@ public class TrackToScanner : MonoBehaviour
     [SerializeField]
     Camera scannerCam;
     Plane[] cameraFrustum;
-    AudioManager audioManager;
     AudioSource[] scannables;
     [SerializeField]
+    LayerMask ghostLayer;
+    [SerializeField]
     Canvas targetCrosshair;
-    Vector3 crosshairPos;
     bool manualTarget = false;
     Collider currentTarget;
 
-    void Start()
-    {
-        audioManager= GetComponent<AudioManager>();
-        crosshairPos = targetCrosshair.GetComponent<RectTransform>().localPosition;
-    }
     // Update is called once per frame
     void Update()
     {
@@ -31,10 +26,11 @@ public class TrackToScanner : MonoBehaviour
     public void UpdateCrosshair()
     {
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(scannerCam);
-        List<Collider> scansInsideFrustum = new List<Collider>();
+        List<Collider> scansInsideFrustum = new();
         foreach (AudioSource source in scannables)
         {
-            if (source.gameObject != null)
+            Debug.Log(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)) + " " + ghostLayer.value);
+            if (source.gameObject != null && Equals(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)), ghostLayer.value))
             {
                 Collider collider = source.gameObject.GetComponentInParent<Collider>();
                 if (GeometryUtility.TestPlanesAABB(cameraFrustum, collider.bounds))
@@ -43,17 +39,6 @@ public class TrackToScanner : MonoBehaviour
                 }
             }
         }
-        //Vector3 scannerCenter = new(128, 128, 0);
-        //scansInsideFrustum.Sort((a, b) => {
-        //    return (scannerCam.WorldToScreenPoint(a.transform.position) - scannerCenter).magnitude.CompareTo((scannerCam.WorldToScreenPoint(b.transform.position) - scannerCenter).magnitude);
-        //});
-
-        // for eventual manual targeting with controls
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    manualTarget = !manualTarget;
-        //}
-
         if (!manualTarget)
         {
             scansInsideFrustum.Sort((a, b) => scannerCam.WorldToScreenPoint(a.transform.position).z.CompareTo(scannerCam.WorldToScreenPoint(b.transform.position).z));
@@ -66,31 +51,15 @@ public class TrackToScanner : MonoBehaviour
                 {
                     currentTarget = collider;
                     targetCrosshair.GetComponent<RectTransform>().anchoredPosition3D = screenPos;
-                    Debug.Log(targetCrosshair.GetComponent<RectTransform>().localScale);
-                    Debug.Log(1 / screenPos.z);
                     targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one *  Mathf.Max((1 / screenPos.z), 1);
                     return;
                 }
             }
             targetCrosshair.enabled = false;
             currentTarget = null;
-        } else
-        {
-            //if (Input.GetKeyDown(KeyCode.E))
-            //{
-            //    ManuallySwitchTarget(scansInsideFrustum);
-            //}
         }
     }
 
-    //public void ManuallySwitchTarget(List<Collider> collidersInFrustum)
-    //{
-    //    manualTarget = true;
-    //    if (currentTarget < collidersInFrustum.Count && currentTarget + 1 < collidersInFrustum.Count)
-    //    {
-    //        currentTarget += 1;
-    //    }
-    //}
     public Collider GetCurrentTarget()
     {
         return currentTarget;

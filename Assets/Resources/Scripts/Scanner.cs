@@ -6,7 +6,7 @@ using UnityEngine;
 public class Scanner : MonoBehaviour
 {
     [SerializeField]
-    int collectableLayer;
+    LayerMask ghostLayer;
     [SerializeField]
     float initialTimerValue = 2f;
     float scanTimer;
@@ -32,7 +32,7 @@ public class Scanner : MonoBehaviour
     {
         Collider currentTarget = tracker.GetCurrentTarget();
         // reset timer if current target is null or target has switched
-        if (currentTarget != null && focusedTarget == currentTarget && currentTarget.gameObject.layer == collectableLayer)
+        if (currentTarget != null && focusedTarget == currentTarget && LayerMask.Equals(LayerMask.GetMask(LayerMask.LayerToName(currentTarget.gameObject.layer)), ghostLayer.value))
         {
             ScanTimer();
             if (scanTimer <= 0f)
@@ -48,33 +48,6 @@ public class Scanner : MonoBehaviour
         }
         focusedTarget = currentTarget;
     }
-    //void CastRay()
-    //{
-    //    Vector3 center = this.gameObject.transform.position;
-    //    Vector3 direction = this.gameObject.transform.forward;
-    //    Ray scanRay = new Ray(center, direction);
-
-    //    if (Physics.Raycast(scanRay, out RaycastHit scanHit, 100, collectableLayer))
-    //    {
-    //        scanLine.SetPosition(0, center);
-    //        scanLine.SetPosition(1, scanHit.point);
-    //        Debug.DrawLine(center, scanHit.point);
-    //        ScanTimer();
-    //        if (scanTimer <= 0f)
-    //        {
- 
-    //            Debug.Log("Scanned!" + scanHit.collider.gameObject.name);
-    //            scanLine.SetPosition(1, center);
-    //            StartCoroutine(UpdateSourcesAfterDelete(0.01f, scanHit.collider.gameObject));
-    //        }
-    //    } else
-    //    {
-    //        scanTimer = 2f;
-    //        startTimer = false;
-    //    }
-    //    //Debug.Log(scanTimer);
-
-    //}
 
     void ScanTimer()
     {
