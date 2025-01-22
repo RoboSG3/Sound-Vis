@@ -1470,6 +1470,8 @@ MonoBehaviour:
   childObject1: {fileID: 464231565}
   childObject2: {fileID: 399233963}
   isToggled: 0
+  toggledMaterial: {fileID: 4247567459774463447, guid: ca15c2d451e2e7f4ba3ec7a3b6a98505, type: 3}
+  untoggledMaterial: {fileID: 8039567086963658369, guid: ca15c2d451e2e7f4ba3ec7a3b6a98505, type: 3}
 --- !u!114 &122282657
 MonoBehaviour:
   m_ObjectHideFlags: 0

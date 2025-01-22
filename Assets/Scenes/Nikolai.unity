@@ -324,6 +324,14 @@ PrefabInstance:
       propertyPath: childObject2
       value: 
       objectReference: {fileID: 1869635511}
+    - target: {fileID: 1140353276764266838, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
+      propertyPath: toggledMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ac1997e48dd1564a88e0f743bc3fbea, type: 2}
+    - target: {fileID: 1140353276764266838, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
+      propertyPath: untoggledMaterial
+      value: 
+      objectReference: {fileID: 8039567086963658369, guid: ca15c2d451e2e7f4ba3ec7a3b6a98505, type: 3}
     - target: {fileID: 3861988292023008296, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.705
@@ -364,10 +372,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -98.536
       objectReference: {fileID: 0}
+    - target: {fileID: 7093090232256630910, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7654202509742309035, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
       propertyPath: m_Name
       value: Fernbedinung (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8854264243467635114, guid: 6920104eafdf06b4492dd9064a2c1c83, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ac1997e48dd1564a88e0f743bc3fbea, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -887,6 +903,7 @@ GameObject:
   - component: {fileID: 895979668}
   - component: {fileID: 895979667}
   - component: {fileID: 895979666}
+  - component: {fileID: 895979670}
   m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
@@ -910,7 +927,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
@@ -978,12 +995,33 @@ Transform:
   m_GameObject: {fileID: 895979665}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -2.09, z: 0}
   m_LocalScale: {x: 5.1002674, y: 5.1002674, z: 5.1002674}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &895979670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895979665}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2.220446e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &974358441 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9140607163498543780, guid: ba93021d2c07cdb42a05bf9f7f7387de, type: 3}
@@ -7072,6 +7110,8 @@ MonoBehaviour:
   childObject1: {fileID: 1536110321}
   childObject2: {fileID: 967237386037028639}
   isToggled: 0
+  toggledMaterial: {fileID: 0}
+  untoggledMaterial: {fileID: 0}
 --- !u!114 &5388071987988757997
 MonoBehaviour:
   m_ObjectHideFlags: 0
