@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TopfWasser : MonoBehaviour
 {
-    private bool _meshActive = false;
+    public bool _meshActive = false;
     private MeshRenderer _mesh;
     public bool drain = true; // Enables or disables the auto-drain feature
     public float drainAfter = 1.0f; // Time in seconds to wait before moving down
@@ -29,8 +29,8 @@ public class TopfWasser : MonoBehaviour
             {
                 _mesh.enabled = true; 
                 Debug.Log("MESH ACTIVATED");
+                _meshActive = true;
             }
-            _meshActive = true;
         }
     }
 
@@ -76,7 +76,7 @@ public class TopfWasser : MonoBehaviour
         if (_mesh != null)
         {
             _mesh.enabled = false;
+            _meshActive = false;
         }
-        _meshActive = false;
     }
 }
