@@ -18,6 +18,7 @@ public class CutsceneHandler :MonoBehaviour
     {
         if (index >= 0 && index < cutsceneElements.Length)
         {
+            Debug.Log(cam);
             cutsceneElements[index].Execute();
         }
     }
