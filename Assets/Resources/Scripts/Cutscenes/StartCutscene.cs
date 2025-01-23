@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StartCutscene : CutsceneElementBase
@@ -41,7 +42,7 @@ public class StartCutscene : CutsceneElementBase
         Vector3 originalRotation = leftHand.transform.localRotation.eulerAngles;
         Vector3 targetRotation = originalRotation + handDegreesToRotate[1];
 
-
+        List<Transform[]> finger = getHandChildren();
         for (int i = 0; i < handDistanceToMove.Length; i++) {
             startTime = Time.time;
             elapsedTime = 0;
@@ -73,5 +74,18 @@ public class StartCutscene : CutsceneElementBase
     private void OnDestroy()
     {
         StopAllCoroutines();
+    }
+
+    private List<Transform[]> getHandChildren()
+    {
+        List<Transform[]> children = new();
+        Transform[] childer = leftHand.GetComponentsInChildren<Transform>();
+        children.Add(childer);
+        foreach(Transform[] child in children)
+        {
+            Debug.Log("Child: " + child[0].position);
+            Debug.Log("Child: " + child[1].position);
+        }
+        return children;
     }
 }
