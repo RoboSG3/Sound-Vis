@@ -9,6 +9,7 @@ public class ZahnbürsteInsideTriggerChecker : MonoBehaviour
     private bool isInsideTrigger = false;  // The boolean to toggle
     private float timer = 0;
     public float time = 0;
+    [SerializeField] NoteUpdater updater;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +17,7 @@ public class ZahnbürsteInsideTriggerChecker : MonoBehaviour
         if (string.IsNullOrEmpty(targetTag) || other.CompareTag(targetTag))
         {
             isInsideTrigger = true; // Set the boolean to true
-            Debug.Log($"Object {other.name} entered the trigger. isInsideTrigger: {isInsideTrigger}");
+            //Debug.Log($"Object {other.name} entered the trigger. isInsideTrigger: {isInsideTrigger}");
         }
     }
 
@@ -26,7 +27,7 @@ public class ZahnbürsteInsideTriggerChecker : MonoBehaviour
         if (string.IsNullOrEmpty(targetTag) || other.CompareTag(targetTag))
         {
             isInsideTrigger = false; // Set the boolean to false
-            Debug.Log($"Object {other.name} exited the trigger. isInsideTrigger: {isInsideTrigger}");
+            //Debug.Log($"Object {other.name} exited the trigger. isInsideTrigger: {isInsideTrigger}");
         }
     }
 
@@ -35,11 +36,11 @@ public class ZahnbürsteInsideTriggerChecker : MonoBehaviour
         if(isInsideTrigger)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
+            //Debug.Log(timer);
 
             if (timer > time)
             {
-                Debug.Log("FERTIG!!!");
+                updater.CompleteQuest("Schalte den Fernseher");
                 timer = 0;
             }
         }

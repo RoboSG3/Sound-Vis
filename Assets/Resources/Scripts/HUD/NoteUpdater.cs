@@ -7,11 +7,10 @@ public class NoteUpdater : MonoBehaviour
     [SerializeField] float fontSize;
     [SerializeField] string[] questnames;
     [SerializeField] GameObject textPrefab;
-    [SerializeField] GameObject script;
     private Dictionary<string, GameObject> quests = new Dictionary<string, GameObject>();
     private Dictionary<string, bool> questProgression = new Dictionary<string, bool>();
     private float height = 310f;
-    private int maxGhosts = 0; //= script.GetComponent<RandSpawn1>().spawnAmount;
+    private int maxGhosts = 0;
     private int ghostCounter = 0;
     private GameObject counterDisplay;
 
@@ -19,9 +18,11 @@ public class NoteUpdater : MonoBehaviour
     {
         PopulateQuests();
         CreateCouter();
+    }
 
-        CompleteQuest("Test Quest One");
-        UpdateGhostCounter();
+    private void Update()
+    {
+        counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + " von " + maxGhosts + " Geistern gefuden";
     }
 
     public void CompleteQuest(string quest)
@@ -71,9 +72,9 @@ public class NoteUpdater : MonoBehaviour
             checkbox.transform.SetParent(newQuest.transform);
             checkbox.transform.localEulerAngles = new Vector3(0, 0, 0);
             checkbox.transform.localScale = new Vector3(1, 1, 1);
-            checkbox.transform.localPosition = new Vector3(420, -20, 0);
+            checkbox.transform.localPosition = new Vector3(420, -15, 0);
             checkbox.GetComponent<TMPro.TextMeshProUGUI>().text = "□";
-            checkbox.GetComponent<TMPro.TextMeshProUGUI>().fontSize = 48;
+            checkbox.GetComponent<TMPro.TextMeshProUGUI>().fontSize = 46;
 
 
             height = height - 50;
@@ -91,5 +92,10 @@ public class NoteUpdater : MonoBehaviour
         counterDisplay.transform.localPosition = new Vector3(0, -300, 0);
         counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().fontSize = 30;
         counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + "/" + maxGhosts + " Geistern gefuden";
+    }
+
+    public void UpdateMaxGhosts()
+    {
+        maxGhosts++;
     }
 }
