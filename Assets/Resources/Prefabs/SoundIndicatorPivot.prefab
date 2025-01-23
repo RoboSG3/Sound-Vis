@@ -140,9 +140,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowPivot: {fileID: 7693004892106314132}
   icon: {fileID: 3619845425762216608}
-  maxScale: 0
-  maxScaleDistance: 0
-  image: {fileID: 21300000, guid: fa3389698513d034684d2dcd2ff9b02b, type: 3}
+  maxScale: 1.7
+  minScale: 0.7
+  maxScaleFactor: 15
   ghost: {fileID: 21300000, guid: fa3389698513d034684d2dcd2ff9b02b, type: 3}
   alarm: {fileID: 21300000, guid: de14e259e20c57c48b627f4135a40547, type: 3}
   eggAlarm: {fileID: 21300000, guid: 42bdf8da85692e6449fffa26f5e3732e, type: 3}
@@ -151,6 +151,11 @@ MonoBehaviour:
   door: {fileID: 21300000, guid: e352dfbe071683e41824cb47d31c5dd4, type: 3}
   drawer: {fileID: 21300000, guid: 6192481677e25884a9f859b7815cabd9, type: 3}
   smartphone: {fileID: 21300000, guid: 1665760d9a801d24d9f24bc87370ecbf, type: 3}
+  doorbell: {fileID: 21300000, guid: 1325b321df86c034498d2780e88e489d, type: 3}
+  faucet: {fileID: 21300000, guid: a1ef6c5abc342d34bb66668bfb408989, type: 3}
+  boiling: {fileID: 21300000, guid: d9e5c19d5f47b624e8eac5fe98cb563b, type: 3}
+  collision: {fileID: 21300000, guid: 81dbb18f0bbf8b340b48a5bc7e616ffa, type: 3}
+  music: {fileID: 21300000, guid: 61ebc61ee27a8044fb6bb583c9f27b50, type: 3}
 --- !u!1 &7542517324256567533
 GameObject:
   m_ObjectHideFlags: 0

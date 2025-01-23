@@ -14,10 +14,12 @@ TagManager:
   - Drawer
   - Smartphone
   - Phone
-  - Timer
-  - Topf
-  - Wecker
-  - "Zahnb\xFCrste"
+  - EggAlarm
+  - Doorbell
+  - Music
+  - Faucet
+  - Collision
+  - Boiling
   layers:
   - Default
   - TransparentFX
@@ -25,12 +27,12 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Collectables
   - Items
   - Ghost
   - Wall
   - Spawner
-  - Socket
+  - 
   - 
   - 
   - 
