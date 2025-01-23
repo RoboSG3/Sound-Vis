@@ -91532,7 +91532,7 @@ MonoBehaviour:
   m_XRHandTrackingEvents: {fileID: 3286259782080331742}
   m_HandMeshRenderer: {fileID: 3845486306706586424}
   m_ShowMeshWhenTrackingIsAcquired: 1
-  m_HideMeshWhenTrackingIsLost: 1
+  m_HideMeshWhenTrackingIsLost: 0
 --- !u!33 &8581467395757399660
 MeshFilter:
   m_ObjectHideFlags: 0
