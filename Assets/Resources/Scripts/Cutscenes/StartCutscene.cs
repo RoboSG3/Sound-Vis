@@ -6,7 +6,7 @@ using UnityEngine;
 public class StartCutscene : CutsceneElementBase
 {
     private Camera cam;
-    [SerializeField] private Animation leftHandAnim;
+    [SerializeField] private Animator leftHandAnim;
     [SerializeField] private Vector3 degreesToRotate;
     public override void Execute()
     {
@@ -32,13 +32,15 @@ public class StartCutscene : CutsceneElementBase
             elapsedTime = Time.time - startTime;
             yield return null;
         }
-        cam.transform.rotation = Quaternion.Euler(targetCamRotation);    
-        leftHandAnim.Play();
+        cam.transform.rotation = Quaternion.Euler(targetCamRotation);
+        leftHandAnim.enabled = true;
+        yield return new WaitForSeconds(0.5f);
         startTime = Time.time;
         elapsedTime = 0;
-        while (elapsedTime < duration)
+ 
+        while (elapsedTime < (duration * 2))
         {
-            float t = elapsedTime / duration;
+            float t = elapsedTime / (duration * 2);
             cam.transform.rotation = Quaternion.Euler(Vector3.Lerp(targetCamRotation, originalCamRotation, t));
             elapsedTime = Time.time - startTime;
             yield return null;
