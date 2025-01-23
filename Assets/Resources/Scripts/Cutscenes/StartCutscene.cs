@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StartCutscene : CutsceneElementBase
 {
     private Camera cam;
-    [SerializeField] private GameObject leftHand;
+    [SerializeField] private AnimationClip leftHandAnim;
     [SerializeField] private Vector3 degreesToRotate;
-    [SerializeField] private Vector3[] handDegreesToRotate;
-    [SerializeField] private Vector3[] handDistanceToMove;
     public override void Execute()
     {
         Debug.Log("Exceute");
@@ -33,36 +32,17 @@ public class StartCutscene : CutsceneElementBase
             elapsedTime = Time.time - startTime;
             yield return null;
         }
-        cam.transform.rotation = Quaternion.Euler(targetCamRotation);
-        Debug.Log(leftHand.transform.position);
-        leftHand.transform.SetLocalPositionAndRotation(handDistanceToMove[0], Quaternion.Euler(handDegreesToRotate[0]));
-        Vector3 originalPosition = leftHand.transform.localPosition;
-        Debug.Log(originalPosition);
-        Vector3 targetPosition = originalPosition + handDistanceToMove[1];
-        Vector3 originalRotation = leftHand.transform.localRotation.eulerAngles;
-        Vector3 targetRotation = originalRotation + handDegreesToRotate[1];
-
-        List<Transform[]> finger = getHandChildren();
-        for (int i = 0; i < handDistanceToMove.Length; i++) {
-            startTime = Time.time;
-            elapsedTime = 0;
-            if (i > 0) 
-            {
-                originalPosition = handDistanceToMove[i - 1];
-                originalRotation = handDegreesToRotate[i - 1];
-            }
-            while (elapsedTime < duration)
-            {
-                float t = elapsedTime / duration;
-                leftHand.transform.SetLocalPositionAndRotation(Vector3.Lerp(originalPosition, handDistanceToMove[i], t), Quaternion.Euler(Vector3.Lerp(originalRotation, handDegreesToRotate[i], t)));
-                elapsedTime = Time.time - startTime;
-                yield return null;
-            }
+        cam.transform.rotation = Quaternion.Euler(targetCamRotation);    
+        leftHandAnim.Play();
+        startTime = Time.time;
+        elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            cam.transform.rotation = Quaternion.Euler(Vector3.Lerp(targetCamRotation, originalCamRotation, t));
+            elapsedTime = Time.time - startTime;
+            yield return null;
         }
-
-
-        //cam.transform.rotation = Quaternion.Euler(targetRotation);
-
         cutsceneHandler.PlayNextElement();
     }
 
@@ -74,18 +54,5 @@ public class StartCutscene : CutsceneElementBase
     private void OnDestroy()
     {
         StopAllCoroutines();
-    }
-
-    private List<Transform[]> getHandChildren()
-    {
-        List<Transform[]> children = new();
-        Transform[] childer = leftHand.GetComponentsInChildren<Transform>();
-        children.Add(childer);
-        foreach(Transform[] child in children)
-        {
-            Debug.Log("Child: " + child[0].position);
-            Debug.Log("Child: " + child[1].position);
-        }
-        return children;
     }
 }
