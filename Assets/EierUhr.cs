@@ -6,6 +6,7 @@ using UnityEngine;
 public class EierUhr : MonoBehaviour
 {
    [SerializeField] GameObject numbers;
+   [SerializeField] ParticleSystem particel;
    public XRToggleButton xRToggleButton;
    public SocketChecker socketChecker;
    public AudioSource audioSource;
@@ -37,7 +38,7 @@ public class EierUhr : MonoBehaviour
          Debug.Log("Started");
          //audioSource.Play();
          StartCoroutine(PlaySoundRepeatedly(playCount, delayBetweenPlays));
-
+         particel.Stop();
         }
       UpdateDisplay();
    }
@@ -88,6 +89,7 @@ public class EierUhr : MonoBehaviour
       {
          started = true;
          Debug.Log("startEierUhr");
+         particel.Play();
       }
       else
       {
