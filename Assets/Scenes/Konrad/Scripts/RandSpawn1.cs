@@ -8,9 +8,10 @@ public class RandSpawn1 : MonoBehaviour
     [SerializeField] private  int maxSpawnAmount;
     [SerializeField] private  float delayTime;
     [SerializeField] AudioManager audioManager;
-    
+    [SerializeField] NoteUpdater updater;
+  
     private Transform spawner;
-    private int spawnAmount;
+    public int spawnAmount;
     private int spawnedCount = 0;
     private Collider[] cachedColliders;
     
@@ -56,6 +57,7 @@ public class RandSpawn1 : MonoBehaviour
             childTransform.gameObject.name = "CatAudio " + spawnedCount;
         }
         spawnedCount++;
+        updater.UpdateMaxGhosts();
 
     }
     

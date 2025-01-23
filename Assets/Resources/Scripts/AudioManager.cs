@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     TrackToScanner tracking;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         tracking = this.GetComponent<TrackToScanner>();
         sources = FindObjectsByType<AudioSource>(FindObjectsSortMode.None);

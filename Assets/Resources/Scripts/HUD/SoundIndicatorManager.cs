@@ -33,6 +33,7 @@ public class SoundIndicator : MonoBehaviour
                 GameObject newIndicator = Instantiate(prefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
                 newIndicator.transform.SetParent(gameObject.transform);
                 newIndicator.transform.localScale = new Vector3(indicatorScale, indicatorScale, indicatorScale);
+                newIndicator.transform.localPosition = new Vector3(960, 540, 0);
                 indicatorDataset.Add(item.name, new IndicatorData(newIndicator, item, maxFadeTime));
             }
         }
