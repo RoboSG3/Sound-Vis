@@ -8,10 +8,11 @@ public class IndicatorIcon : MonoBehaviour
 {
     [SerializeField] GameObject arrowPivot;
     [SerializeField] GameObject icon;
-    [SerializeField] float maxScale;
-    [SerializeField] float maxScaleDistance;
+    [SerializeField] float maxScale = 1.7f;
+    [SerializeField] float minScale = 0.7f;
+    [SerializeField] float maxScaleFactor = 15f;
     private float defaultScale = 1;
-    [SerializeField] Sprite image;
+    private Sprite image;
 
     [SerializeField] Sprite ghost;
     [SerializeField] Sprite alarm;
@@ -21,7 +22,11 @@ public class IndicatorIcon : MonoBehaviour
     [SerializeField] Sprite door;
     [SerializeField] Sprite drawer;
     [SerializeField] Sprite smartphone;
-
+    [SerializeField] Sprite doorbell;
+    [SerializeField] Sprite faucet;
+    [SerializeField] Sprite boiling;
+    [SerializeField] Sprite collision;
+    [SerializeField] Sprite music;
 
 
     public void UpdateArrowDirection(float relativHeight, float rotation)
@@ -59,8 +64,8 @@ public class IndicatorIcon : MonoBehaviour
         }
         float perceivedVolume = source.volume * volumeFactor;
         Debug.Log(perceivedVolume);
-        float scaleFactor = perceivedVolume * 15;
-        scaleFactor = Mathf.Clamp(scaleFactor, 0.7f, 1.7f);
+        float scaleFactor = perceivedVolume * maxScaleFactor;
+        scaleFactor = Mathf.Clamp(scaleFactor, minScale, maxScale);
 
         icon.transform.localScale = new Vector3(defaultScale * scaleFactor, defaultScale * scaleFactor, defaultScale);
     }
@@ -80,6 +85,50 @@ public class IndicatorIcon : MonoBehaviour
 
             case "Door":
                 image = door;
+                break;
+
+            case "Alarm":
+                image = alarm;
+                break;
+
+            case "Closet":
+                image = closet;
+                break;
+
+            case "Drawer":
+                image = drawer;
+                break;
+
+            case "Smartphone":
+                image = smartphone;
+                break;
+
+            case "Phone":
+                image = phone;
+                break;
+
+            case "EggAlarm":
+                image = eggAlarm;
+                break;
+
+            case "Doorbell":
+                image = doorbell;
+                break;
+
+            case "Boiling":
+                image = boiling;
+                break;
+
+            case "Collision":
+                image = collision;
+                break;
+
+            case "Faucet":
+                image = faucet;
+                break;
+
+            case "Music":
+                image = music;
                 break;
 
             default:
