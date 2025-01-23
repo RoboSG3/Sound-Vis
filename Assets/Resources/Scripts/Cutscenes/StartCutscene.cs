@@ -6,7 +6,7 @@ using UnityEngine;
 public class StartCutscene : CutsceneElementBase
 {
     private Camera cam;
-    [SerializeField] private AnimationClip leftHandAnim;
+    [SerializeField] private Animation leftHandAnim;
     [SerializeField] private Vector3 degreesToRotate;
     public override void Execute()
     {
