@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,10 +9,13 @@ public class EierUhr : MonoBehaviour
    public XRToggleButton xRToggleButton;
    public SocketChecker socketChecker;
    public AudioSource audioSource;
+   public int playCount = 3;
+   public float delayBetweenPlays = 0f;
    private int timer;
    private float temp = 0.0f;
    private bool started = false;
    private TextMeshProUGUI _textMeshProUGUI;
+
 
    private void Start()
    {
@@ -27,16 +31,27 @@ public class EierUhr : MonoBehaviour
          timer--;
       }
 
-      if (timer == 0)
+      if (timer == 0 && started)
       {
          started = false; 
          Debug.Log("Started");
-         audioSource.Play();
-      }
+         //audioSource.Play();
+         StartCoroutine(PlaySoundRepeatedly(playCount, delayBetweenPlays));
+
+        }
       UpdateDisplay();
    }
 
-   public void IncreaseByMin()
+    private IEnumerator PlaySoundRepeatedly(int times, float delay)
+    {
+        for (int i = 0; i < times; i++)
+        {
+            audioSource.Play();
+            yield return new WaitForSeconds(audioSource.clip.length + delay);
+        }
+    }
+
+    public void IncreaseByMin()
    {
       Debug.Log("IncreaseByMin");
       timer += 60;
@@ -61,7 +76,7 @@ public class EierUhr : MonoBehaviour
    {
       int minutes = Mathf.FloorToInt(timer / 60);
       int seconds = Mathf.FloorToInt(timer % 60);
-      Debug.Log(minutes + ":" + seconds);
+      //Debug.Log(minutes + ":" + seconds);
       
       _textMeshProUGUI.text = string.Format("{0:00}:{1:00}", minutes, seconds);
       
