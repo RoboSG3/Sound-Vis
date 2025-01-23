@@ -32,25 +32,33 @@ public class StartCutscene : CutsceneElementBase
             elapsedTime = Time.time - startTime;
             yield return null;
         }
-
         cam.transform.rotation = Quaternion.Euler(targetCamRotation);
-
-        leftHand.transform.SetPositionAndRotation(handDistanceToMove[0], Quaternion.Euler(handDegreesToRotate[0]));
-        Vector3 originalPosition = leftHand.transform.position;
+        Debug.Log(leftHand.transform.position);
+        leftHand.transform.SetLocalPositionAndRotation(handDistanceToMove[0], Quaternion.Euler(handDegreesToRotate[0]));
+        Vector3 originalPosition = leftHand.transform.localPosition;
+        Debug.Log(originalPosition);
         Vector3 targetPosition = originalPosition + handDistanceToMove[1];
-        Vector3 originalRotation = leftHand.transform.rotation.eulerAngles;
+        Vector3 originalRotation = leftHand.transform.localRotation.eulerAngles;
         Vector3 targetRotation = originalRotation + handDegreesToRotate[1];
 
-        startTime = Time.time;
-        elapsedTime = 0;
 
-        while (elapsedTime < duration)
-        {
-            float t = elapsedTime / duration;
-            leftHand.transform.SetPositionAndRotation(Vector3.Lerp(originalPosition, targetPosition, t), Quaternion.Euler(Vector3.Lerp(originalRotation, targetRotation, t)));
-            elapsedTime = Time.time - startTime;
-            yield return null;
+        for (int i = 0; i < handDistanceToMove.Length; i++) {
+            startTime = Time.time;
+            elapsedTime = 0;
+            if (i > 0) 
+            {
+                originalPosition = handDistanceToMove[i - 1];
+                originalRotation = handDegreesToRotate[i - 1];
+            }
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
+                leftHand.transform.SetLocalPositionAndRotation(Vector3.Lerp(originalPosition, handDistanceToMove[i], t), Quaternion.Euler(Vector3.Lerp(originalRotation, handDegreesToRotate[i], t)));
+                elapsedTime = Time.time - startTime;
+                yield return null;
+            }
         }
+
 
         //cam.transform.rotation = Quaternion.Euler(targetRotation);
 
