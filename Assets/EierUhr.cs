@@ -85,7 +85,7 @@ public class EierUhr : MonoBehaviour
 
    public void startEierUhr()
    {
-      if (socketChecker.isObjectInside && xRToggleButton.isToggled && timer > 0)
+      if (socketChecker.isObjectInside && xRToggleButton.isToggled && timer >= 180)
       {
          started = true;
          Debug.Log("startEierUhr");
