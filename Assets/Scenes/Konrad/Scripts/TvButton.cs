@@ -56,7 +56,7 @@ public class TvButton : MonoBehaviour
             childObject1.SetActive(false);
             childObject2.SetActive(true);
             objectRenderer.material = untoggledMaterial; // Change to the untoggled material
-            updater.CompleteQuest("Schalte den Fernseher");
+            updater.CompleteQuest("Fernseher auschalten");
         }
     }
 }

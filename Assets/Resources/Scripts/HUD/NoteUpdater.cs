@@ -13,6 +13,7 @@ public class NoteUpdater : MonoBehaviour
     private int maxGhosts = 0;
     private int ghostCounter = 0;
     private GameObject counterDisplay;
+    public bool twoQuests = false;
 
     private void Start()
     {
@@ -50,6 +51,23 @@ public class NoteUpdater : MonoBehaviour
     {
         ghostCounter += 1;
         counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + " von " + maxGhosts + " Geistern gefuden";
+    }
+
+    void Update()
+    {
+        int counter = 0;
+        foreach (var quest in questProgression)
+        {
+            if (quest.Value)
+            {
+                counter++;
+            }
+        }
+        if (counter >= 2)
+        {
+            twoQuests = true;
+            Debug.Log("true");
+        }
     }
 
     private void PopulateQuests()

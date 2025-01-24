@@ -7489,7 +7489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1022372908845186198, guid: 44ecdebf78ccce048b12ccce4a669e59, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1022372908845186198, guid: 44ecdebf78ccce048b12ccce4a669e59, type: 3}
       propertyPath: m_TagString
@@ -48608,9 +48608,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1711742628}
   time: 1
-  time2: 1
+  time2: 5
   joint: {fileID: 1310260312}
   interactable: {fileID: 1310260310}
+  updater: {fileID: 1557895215319872829}
 --- !u!135 &1373711759
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -103923,7 +103924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &919132149559319317
 GameObject:
   m_ObjectHideFlags: 0

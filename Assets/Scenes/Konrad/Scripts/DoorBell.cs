@@ -8,7 +8,8 @@ public class DoorBell : MonoBehaviour
     [SerializeField] int time2 = 4;
     [SerializeField] HingeJoint joint;
     [SerializeField] XRGrabInteractable interactable;
-
+    [SerializeField] NoteUpdater updater;
+ 
     private float counter = 0;
     private float counter2 = 0;
     private bool doorBell = false;
@@ -16,7 +17,8 @@ public class DoorBell : MonoBehaviour
 
     private void Update()
     {
-        if (counter < time && !doorBell)
+        Debug.Log(updater.twoQuests);
+        if (counter < time && !doorBell && updater.twoQuests)
         {
             counter += Time.deltaTime;
         }
@@ -26,6 +28,11 @@ public class DoorBell : MonoBehaviour
             audioSource.Play();
             audioSource.loop = true;
             doorBell = true;
+            interactable.enabled = true;
+            JointLimits limits = joint.limits;
+            limits.min = -120f;
+            limits.max = 120f;
+            joint.limits = limits;
         }
 
         if (counter2 < time2 && doorBell && !loop)
@@ -38,11 +45,7 @@ public class DoorBell : MonoBehaviour
             audioSource.Stop();
             audioSource.loop = false;
             loop = true;
-            interactable.enabled = true;
-            JointLimits limits = joint.limits;
-            limits.min = -120f;
-            limits.max = 120f;
-            joint.limits = limits;
+
 
         }
     }
