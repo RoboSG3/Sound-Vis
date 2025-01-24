@@ -20,11 +20,6 @@ public class NoteUpdater : MonoBehaviour
         CreateCouter();
     }
 
-    private void Update()
-    {
-        counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + " von " + maxGhosts + " Geistern gefuden";
-    }
-
     public void CompleteQuest(string quest)
     {
         GameObject checkedbox = Instantiate(textPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -91,11 +86,12 @@ public class NoteUpdater : MonoBehaviour
         counterDisplay.transform.localScale = new Vector3(1, 1, 1);
         counterDisplay.transform.localPosition = new Vector3(0, -300, 0);
         counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().fontSize = 30;
-        counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + "/" + maxGhosts + " Geistern gefuden";
+        counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = "";
     }
 
     public void UpdateMaxGhosts()
     {
         maxGhosts++;
+        counterDisplay.GetComponent<TMPro.TextMeshProUGUI>().text = ghostCounter + " von " + maxGhosts + " Geistern gefuden";
     }
 }

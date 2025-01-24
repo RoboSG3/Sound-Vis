@@ -16,9 +16,9 @@ public class EierUhr : MonoBehaviour
    private float temp = 0.0f;
    private bool started = false;
    private TextMeshProUGUI _textMeshProUGUI;
+   [SerializeField] NoteUpdater updater;
 
-
-   private void Start()
+    private void Start()
    {
       _textMeshProUGUI = numbers.GetComponent<TMPro.TextMeshProUGUI>();
    }
@@ -36,7 +36,7 @@ public class EierUhr : MonoBehaviour
       {
          started = false; 
          Debug.Log("Started");
-         //audioSource.Play();
+         updater.CompleteQuest("Koche ein Ei");
          StartCoroutine(PlaySoundRepeatedly(playCount, delayBetweenPlays));
          particel.Stop();
         }

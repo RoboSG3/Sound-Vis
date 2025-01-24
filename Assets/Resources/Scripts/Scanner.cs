@@ -14,6 +14,8 @@ public class Scanner : MonoBehaviour
     AudioManager audioManager;
     TrackToScanner tracker;
     Collider focusedTarget;
+    [SerializeField] NoteUpdater updater;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -68,7 +70,7 @@ public class Scanner : MonoBehaviour
         Destroy(delete);
         yield return new WaitForSeconds(delayTime);
         audioManager.UpdateSources();
-        
+        updater.UpdateGhostCounter();
         //Do the action after the delay time has finished.
     }
 }

@@ -5,6 +5,7 @@ public class PlayAudioTrigger : MonoBehaviour
     public XRToggleButton xRToggleButton;
     public SocketChecker socketChecker;
     public AudioSource audioSource;
+    [SerializeField] NoteUpdater updater;
 
     private bool isPlaying = false;
 
@@ -16,6 +17,7 @@ public class PlayAudioTrigger : MonoBehaviour
             audioSource.loop = true;
             audioSource.Play();
             isPlaying = true;
+            updater.CompleteQuest("Plattenspieler abspielen");
         }
 
         else if ((!xRToggleButton.isToggled || !socketChecker.isObjectInside) && isPlaying)
