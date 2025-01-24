@@ -13,6 +13,7 @@ public class StartCutscene : CutsceneElementBase
     [SerializeField] private Vector3 degreesToRotate;
     [SerializeField] private GameObject leftHand;
     [SerializeField] private GameObject rightHand;
+    [SerializeField] private GameObject soundCanvas;
     public override void Execute()
     {
         Debug.Log("Exceute");
@@ -69,6 +70,8 @@ public class StartCutscene : CutsceneElementBase
         leftHand.GetComponent <XRHandMeshController>().hideMeshWhenTrackingIsLost = true;
         leftHand.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
         rightHand.GetComponentInChildren<SkinnedMeshRenderer>().enabled= true;
+        yield return new WaitForSeconds(4.5f);
+        soundCanvas.SetActive(true);
 
     }
 
