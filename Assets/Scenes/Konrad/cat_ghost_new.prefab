@@ -557,6 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6743118005233693156}
   - component: {fileID: 2920052785112676865}
+  - component: {fileID: -2844802407149291414}
   m_Layer: 8
   m_Name: cat_ghost_new
   m_TagString: Ghost
@@ -603,6 +604,28 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.2
   m_Center: {x: 0, y: 0.05, z: 0}
+--- !u!95 &-2844802407149291414
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845842596697869364}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e238113a1326cdb498a1d20fa4fa5ad5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4953626729100410319
 GameObject:
   m_ObjectHideFlags: 0

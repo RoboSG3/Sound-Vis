@@ -2738,6 +2738,8 @@ MonoBehaviour:
   maxSpawnAmount: 20
   delayTime: 0
   audioManager: {fileID: 0}
+  updater: {fileID: 0}
+  spawnAmount: 0
 --- !u!1 &7623152650718639843
 GameObject:
   m_ObjectHideFlags: 0
