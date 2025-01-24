@@ -125,15 +125,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             rightHandMoveInput.manualValue = Vector2.zero;
             if (moveBack)
             {
-                leftHandMoveInput.manualValue = Vector2.down;
-                input = Vector2.down;
-                rightHandMoveInput.manualValue = Vector2.down;
+                leftHandMoveInput.manualValue = Vector2.down * 0.7f;
+                input = Vector2.down * 0.7f;
+                rightHandMoveInput.manualValue = Vector2.down * 0.7f;
             }
             else if (moveForward)
             {
-                leftHandMoveInput.manualValue = Vector2.up;
-                input = Vector2.up;
-                rightHandMoveInput.manualValue = Vector2.up;
+                leftHandMoveInput.manualValue = Vector2.up * 0.7f;
+                input = Vector2.up * 0.7f;
+                rightHandMoveInput.manualValue = Vector2.up * 0.7f;
             } else if (leftHandMoveInput.ReadValue() == Vector2.zero && rightHandMoveInput.ReadValue() == Vector2.zero)
             {
                 return Vector3.zero;
