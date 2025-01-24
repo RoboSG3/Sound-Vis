@@ -33,6 +33,7 @@ public class DoorBell : MonoBehaviour
             limits.min = -120f;
             limits.max = 120f;
             joint.limits = limits;
+            updater.CompleteQuest("Gehe zur Haustür");
         }
 
         if (counter2 < time2 && doorBell && !loop)

@@ -48607,8 +48607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1711742628}
-  time: 1
-  time2: 5
+  time: 10
+  time2: 10
   joint: {fileID: 1310260312}
   interactable: {fileID: 1310260310}
   updater: {fileID: 1557895215319872829}
@@ -107123,7 +107123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2798761575816689856, guid: 2c6fe0647682fbc43a3f3ef4d78fb216, type: 3}
       propertyPath: 'questnames.Array.data[3]'
-      value: "Gehe zur T\xFCr"
+      value: "Gehe zur Haust\xFCr"
       objectReference: {fileID: 0}
     - target: {fileID: 2798761575816689856, guid: 2c6fe0647682fbc43a3f3ef4d78fb216, type: 3}
       propertyPath: 'questnames.Array.data[4]'

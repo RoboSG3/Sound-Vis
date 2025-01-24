@@ -40,7 +40,7 @@ public class ZahnbürsteInsideTriggerChecker : MonoBehaviour
 
             if (timer > time)
             {
-                updater.CompleteQuest("Schalte den Fernseher");
+                updater.CompleteQuest("Putze Zähne (10 Sek)");
                 timer = 0;
             }
         }
