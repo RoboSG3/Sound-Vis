@@ -125,21 +125,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             rightHandMoveInput.manualValue = Vector2.zero;
             if (moveBack)
             {
-                Debug.Log("left Pose");
                 leftHandMoveInput.manualValue = Vector2.down;
                 input = Vector2.down;
                 rightHandMoveInput.manualValue = Vector2.down;
-                Debug.Log(leftHandMoveInput.manualValue);
-                Debug.Log(rightHandMoveInput.manualValue);
             }
             else if (moveForward)
             {
-                Debug.Log("right Pose");
                 leftHandMoveInput.manualValue = Vector2.up;
                 input = Vector2.up;
                 rightHandMoveInput.manualValue = Vector2.up;
-                Debug.Log(leftHandMoveInput.manualValue);
-                Debug.Log(rightHandMoveInput.manualValue);
             } else if (leftHandMoveInput.ReadValue() == Vector2.zero && rightHandMoveInput.ReadValue() == Vector2.zero)
             {
                 return Vector3.zero;
@@ -219,25 +213,21 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         public void repulsionPoseBackMade()
         {
             moveBack = true;
-            Debug.Log("moveBack");
         }
 
         public void repulsionPoseBackReleased()
         {
             moveBack = false;
-            Debug.Log("stopmoveBack");
         }
 
         public void repulsionPoseForwardMade()
         {
             moveForward = true;
-            Debug.Log("moveForward");
         }
 
         public void repulsionPoseForwardReleased()
         {
             moveForward = false;
-            Debug.Log("stopMoveForward");
         }
     }
 }
