@@ -34,7 +34,7 @@ public class TrackToScanner : MonoBehaviour
             //Debug.Log(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)) + " " + ghostLayer.value);
             if (source.gameObject != null && Equals(LayerMask.GetMask(LayerMask.LayerToName(source.gameObject.layer)), ghostLayer.value))
             {
-                Collider collider = source.gameObject.GetComponentInParent<Collider>();
+                Collider collider = source.gameObject.transform.parent.GetComponent<Collider>();
                 if (GeometryUtility.TestPlanesAABB(cameraFrustum, collider.bounds))
                 {
                     scansInsideFrustum.Add(collider);
@@ -47,10 +47,17 @@ public class TrackToScanner : MonoBehaviour
             
             foreach (Collider collider in scansInsideFrustum)
             {
-                    if (Physics.Raycast(scannerCam.transform.position, collider.transform.position, Vector3.Distance(collider.transform.position, scannerCam.transform.position), allObstacles.value))
-                    {
-                        return;
-                    }
+                if (Physics.Raycast(scannerCam.transform.position, (collider.transform.position - scannerCam.transform.position).normalized, out RaycastHit hitinfo, Vector3.Distance(collider.transform.position, scannerCam.transform.position) - collider.bounds.extents.magnitude, allObstacles.value))
+                {
+                    Debug.Log("Hitinfo, distance: " + hitinfo.distance);
+                    Debug.Log("Hitinfo, collider: " + hitinfo.collider);
+                    Debug.Log("Hitinfo, point: " + hitinfo.point);
+                    Debug.Log("Hitinfo, transform: " + hitinfo.transform);
+                    Debug.Log(Vector3.Distance(collider.transform.position, scannerCam.transform.position));
+                    return;
+                }
+                else
+                {
                     targetCrosshair.enabled = true;
                     Vector3 screenPos = scannerCam.WorldToScreenPoint(collider.transform.position);
                     if (screenPos.x > 64 && screenPos.x < 192 && screenPos.y > 64 && screenPos.y < 192)
@@ -60,6 +67,8 @@ public class TrackToScanner : MonoBehaviour
                         targetCrosshair.GetComponent<RectTransform>().localScale = Vector3.one * Mathf.Max((1 / screenPos.z), 1);
                         return;
                     }
+                }
+
             }
             targetCrosshair.enabled = false;
             currentTarget = null;
